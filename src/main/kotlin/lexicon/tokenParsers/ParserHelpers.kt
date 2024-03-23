@@ -5,11 +5,10 @@ import java.lang.Character.isWhitespace
 
 
 fun sckipWhitespaces(enumerator: CharEnumerator) : CharEnumerator {
-    while (
-        enumerator.moveNext()
-        &&
-        isWhitespace(enumerator.current)
-    ){}
+    while (enumerator.moveNext()){
+        if (!isWhitespace(enumerator.current))
+            return enumerator
+    }
 
-    return enumerator;
+    return enumerator
 }
