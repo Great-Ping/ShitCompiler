@@ -1,15 +1,13 @@
 package toolkit.enumerators
 
-public final class CharEnumerator(
+class CharEnumerator(
     private val _charArray: CharArray,
     private var _currentIndex: Int
-) : Iterable<Char>{
+) : CharIterator(){
 
-    public constructor(
-        string: String
-    ): this(
+    public constructor(string: String): this(
         string.toCharArray(),
-        -1
+        0
     ) { }
 
     val current
@@ -17,29 +15,44 @@ public final class CharEnumerator(
 
     fun moveNext(): Boolean{
         val nextIndex = _currentIndex + 1
-        if (nextIndex >= _charArray.size)
+        if (nextIndex >= _charArray.size) {
             return false
+        }
 
-        _currentIndex = nextIndex;
+        _currentIndex = nextIndex
         return true;
+    }
+
+    override fun hasNext(): Boolean {
+        return _currentIndex < _charArray.size
     }
 
     fun movePrevious(): Boolean{
-        val nextIndex = _currentIndex - 1
-        if (nextIndex < 0)
-            return false
+        if (hasPrevious()) {
+            _currentIndex--;
+            return true;
+        }
 
-        _currentIndex = nextIndex;
-        return true;
+        return false;
     }
 
+    fun hasPrevious():Boolean{
+        return _currentIndex > 1
+    }
+
+    //Todo сохранение состоний мб быстрее постоянного выделения памяти
     public fun clone(): CharEnumerator {
         return CharEnumerator(_charArray, _currentIndex)
     }
 
-    override fun iterator(): Iterator<Char> {
+    override fun nextChar(): Char {
+        moveNext()
+        return current
+    }
+
+    override fun toString(): String {
         return _charArray
-            .drop(_currentIndex - 1)
-            .iterator()
+            .drop(_currentIndex)
+            .joinToString()
     }
 }

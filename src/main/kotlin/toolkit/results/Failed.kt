@@ -7,4 +7,8 @@ class Failed<ExceptionType : Throwable, ResultType>(
         throw exception
     }
 
+    override fun toString(): String {
+        return "Failed: $exception"
+    }
+
 }
