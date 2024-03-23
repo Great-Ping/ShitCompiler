@@ -1,7 +1,7 @@
 package toolkit.extensions
 
-import toolkit.iterators.StringIterator
+import toolkit.enumerators.CharEnumerator
 
-fun String.toStringIterator(): StringIterator{
-    return StringIterator(this)
+fun String.toStringIterator(): CharEnumerator{
+    return CharEnumerator(this)
 }

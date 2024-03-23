@@ -1,4 +1,11 @@
 package lexicon.tokenParsers
 
-class IntegerLiteralTokenParser {
+import lexicon.ParsingInfo
+import toolkit.enumerators.CharEnumerator
+import toolkit.results.Result
+
+class IntegerLiteralTokenParser : TokenParser {
+    override fun parse(enumerator: CharEnumerator): Result<ParsingInfo> {
+        TODO("Not yet implemented")
+    }
 }

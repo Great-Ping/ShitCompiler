@@ -1,9 +1,11 @@
 package lexicon.tokenParsers
 
-import lexicon.tokens.Token
+import lexicon.ParsingInfo
+import toolkit.enumerators.CharEnumerator
+import toolkit.results.Result
 
 class CommentTokenParser : TokenParser{
-    override fun parse(str:String) : Token {
-        TODO("not implemented")
+    override fun parse(enumerator: CharEnumerator): Result<ParsingInfo> {
+        TODO("Not yet implemented")
     }
 }

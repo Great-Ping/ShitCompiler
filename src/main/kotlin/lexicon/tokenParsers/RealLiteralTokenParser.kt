@@ -4,7 +4,7 @@ import lexicon.ParsingInfo
 import toolkit.enumerators.CharEnumerator
 import toolkit.results.Result
 
-class OperatorOrPunctuatorTokenParser : TokenParser {
+class RealLiteralTokenParser: TokenParser {
     override fun parse(enumerator: CharEnumerator): Result<ParsingInfo> {
         TODO("Not yet implemented")
     }

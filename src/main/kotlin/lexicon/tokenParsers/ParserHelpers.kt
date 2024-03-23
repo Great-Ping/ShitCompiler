@@ -1,7 +1,15 @@
 package lexicon.tokenParsers
 
+import toolkit.enumerators.CharEnumerator
+import java.lang.Character.isWhitespace
 
-fun sckipSpaces(iterator: Iterator<Char>) : Result<Iterator<Char>>
-{
-    TODO()
+
+fun sckipWhitespaces(enumerator: CharEnumerator) : CharEnumerator {
+    while (
+        enumerator.moveNext()
+        &&
+        isWhitespace(enumerator.current)
+    ){}
+
+    return enumerator;
 }

@@ -1,6 +1,6 @@
 package lexicon.tokens
 
-public final class SimpleToken(
+public final class CommonToken(
     public override val tokenType: TokenTypes
 ) : Token {
     override fun toString(): String {
