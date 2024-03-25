@@ -2,7 +2,7 @@ package toolkit.results
 
 class Failed<ExceptionType : Throwable, ResultType>(
     val exception: ExceptionType
-): Result<ResultType> (ResultState.FAILED) {
+): Result<ResultType> () {
     override fun unwrap(): ResultType {
         throw exception
     }

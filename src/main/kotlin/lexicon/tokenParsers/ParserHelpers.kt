@@ -1,32 +1,53 @@
 package lexicon.tokenParsers
 
 import toolkit.enumerators.CharEnumerator
+import toolkit.enumerators.moveNext
+import toolkit.enumerators.movePrevious
 import java.lang.Character.isWhitespace
 
-//TODO В данной реализации необходимо возвращать итератор
-
-fun sckipWhitespaces(
+//!!!Изменяет состояние enumerator
+//Работает на упреждение
+fun skipWhitespaces(
     enumerator: CharEnumerator
-) : CharEnumerator {
-    do {
-        if (!isWhitespace(enumerator.current))
-            return enumerator
-    } while (enumerator.moveNext())
+) : Boolean {
+    var whitespacesSkipped: Boolean = false
+    while (enumerator.moveNext()) {
+        if (isWhitespace(enumerator.current))
+            whitespacesSkipped = true;
+        else
+            break
+     }
 
-    return enumerator
+    if (whitespacesSkipped)
+        enumerator.movePrevious()
+
+    return whitespacesSkipped
 }
 
+
+//!!!Изменяет состояние enumerator
+//Работает на упреждение
 fun continuesWith(
     enumerator: CharEnumerator,
     pattern:String
 ): Boolean {
     val iterator = pattern.iterator()
-    do {
-        if (enumerator.current != iterator.next())
-            return false;
-    } while (
-        iterator.hasNext()
-        && enumerator.moveNext())
 
-    return true
+    while (iterator.hasNext() && enumerator.moveNext()) {
+        if (enumerator.current != iterator.next())
+            return false
+    }
+    return !iterator.hasNext()
 }
+
+
+//!!!Изменяет состояние enumerator
+//Работает на упреждение
+fun continuesWith(
+    enumerator: CharEnumerator,
+    symbol:Char
+): Boolean {
+    return enumerator.moveNext() && enumerator.current != symbol
+}
+
+

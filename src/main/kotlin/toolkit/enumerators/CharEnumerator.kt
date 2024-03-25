@@ -5,44 +5,31 @@ class CharEnumerator(
     private var _currentIndex: Int
 ) : CharIterator(){
 
-    public constructor(string: String): this(
+    constructor(string: String): this(
         string.toCharArray(),
-        0
+        -1
     ) { }
+
+    val currentIndex
+        get() = _currentIndex
 
     val current
         get() = _charArray[_currentIndex]
 
-    fun moveNext(): Boolean{
-        val nextIndex = _currentIndex + 1
-        if (nextIndex >= _charArray.size) {
-            return false
-        }
 
-        _currentIndex = nextIndex
-        return true;
+    fun moveTo(index: Int): Boolean{
+        if (index >= _charArray.size || index < 0)
+            return false
+        _currentIndex = index;
+        return true
     }
 
     override fun hasNext(): Boolean {
         return _currentIndex < _charArray.size
     }
 
-    fun movePrevious(): Boolean{
-        if (hasPrevious()) {
-            _currentIndex--;
-            return true;
-        }
-
-        return false;
-    }
-
     fun hasPrevious():Boolean{
         return _currentIndex > 1
-    }
-
-    //Todo сохранение состоний мб быстрее постоянного выделения памяти
-    public fun clone(): CharEnumerator {
-        return CharEnumerator(_charArray, _currentIndex)
     }
 
     override fun nextChar(): Char {
@@ -52,7 +39,10 @@ class CharEnumerator(
 
     override fun toString(): String {
         return _charArray
-            .drop(_currentIndex)
+            .drop(
+                if (currentIndex < 0)
+                    0
+                else currentIndex)
             .joinToString()
     }
 }

@@ -1,11 +1,10 @@
 package lexicon.tokenParsers
 
-import lexicon.ParsingInfo
 import lexicon.tokens.CommonToken
+import lexicon.tokens.Token
 import lexicon.tokens.TokenTypes
 import toolkit.enumerators.CharEnumerator
-import toolkit.results.Result
-import toolkit.results.ResultState
+import toolkit.enumerators.moveNext
 
 class CommentTokenParser : TokenParser{
 
@@ -14,42 +13,43 @@ class CommentTokenParser : TokenParser{
         const val ONE_LINE_COMMENT_END: String = "\n"
         const val MANY_LINE_COMMENT_START: String = "/*"
         const val MANY_LINE_COMMENT_END: String = "*/"
-
     }
 
     private fun parseComment(
         enumerator: CharEnumerator,
         start: String,
         end: String
-    ):Result<ParsingInfo>{
+    ): Token? {
         if (!continuesWith(enumerator, start))
-            return Result.fail(Exception())
+            return null
 
         do {
+            val enumeratorState = enumerator.currentIndex
             if (continuesWith(enumerator, end)) {
                 break
             }
-        } while (enumerator.moveNext())
+            enumerator.moveTo(enumeratorState)
+        } while(enumerator.moveNext())
 
-        return Result.ok(
-            ParsingInfo(
-                enumerator,
-                CommonToken(TokenTypes.COMMENT)))
+        return CommonToken(TokenTypes.COMMENT)
     }
 
 
-    override fun parse(enumerator: CharEnumerator): Result<ParsingInfo> {
+    override fun parse(enumerator: CharEnumerator): Token? {
+        val enumeratorState: Int = enumerator.currentIndex
+        
         val parseResult = parseComment(
-            enumerator.clone(),
-            ONE_LINE_COMMENT_START,
-            ONE_LINE_COMMENT_END)
-
-        if (parseResult.state != ResultState.FAILED)
-            return parseResult
-
-        return parseComment(
             enumerator,
             ONE_LINE_COMMENT_START,
             ONE_LINE_COMMENT_END)
+        
+        if (parseResult != null)
+            return parseResult
+        
+        enumerator.moveTo(enumeratorState)
+        return parseComment(
+            enumerator,
+            MANY_LINE_COMMENT_START,
+            MANY_LINE_COMMENT_END)
     }
 }

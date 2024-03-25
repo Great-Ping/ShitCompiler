@@ -1,7 +1,6 @@
 package toolkit.results
 
-abstract class Result<ResultType> (
-    val state: ResultState
+abstract class Result<ResultType> internal constructor(
 ) {
     abstract fun unwrap(): ResultType
 

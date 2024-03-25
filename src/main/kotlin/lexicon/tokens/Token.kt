@@ -1,5 +1,5 @@
 package lexicon.tokens
 
-interface Token {
-    val tokenType: TokenTypes;
-}
+abstract class Token (
+    val tokenType: TokenTypes
+){}

@@ -4,9 +4,8 @@ import lexicon.tokenParsers.*
 import lexicon.tokens.Token
 import toolkit.enumerators.CharEnumerator
 import toolkit.results.Result
-import toolkit.results.ResultState
 
-class SimpleLexer(iterator: CharEnumerator) : Lexer {
+class SimpleLexer   (iterator: CharEnumerator) : Lexer {
 
     constructor(string: String): this(
         CharEnumerator(string)
@@ -24,17 +23,29 @@ class SimpleLexer(iterator: CharEnumerator) : Lexer {
     )
 
     override fun nextToken(): Result<Token> {
-        for (parser in _parsers) {
-            _iterator = sckipWhitespaces(_iterator)
-            val parseResult = parser.parse(_iterator.clone());
-            if (parseResult.state == ResultState.FAILED)
-                continue
+        skipWhitespaces(_iterator)
 
-            val parsingInfo = parseResult.unwrap()
-            _iterator = parsingInfo.Iterator
-            return Result.ok(parsingInfo.Token);
+        if (!_iterator.hasNext())
+            return Result.fail(Error("String ended"))
+
+        for (parser in _parsers) {
+            val iteratorState = _iterator.currentIndex
+            val parsedToken = parser.parse(
+                _iterator
+            )
+
+            if (parsedToken == null) {
+                _iterator.moveTo(iteratorState)
+                continue
+            }
+
+            return Result.ok(parsedToken)
         }
 
         return Result.fail(Exception("TODO"));
+    }
+
+    override fun toString(): String {
+        return "SimpleLexer: $_iterator"
     }
 }

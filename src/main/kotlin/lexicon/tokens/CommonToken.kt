@@ -1,8 +1,8 @@
 package lexicon.tokens
 
-public final class CommonToken(
-    public override val tokenType: TokenTypes
-) : Token {
+public open class CommonToken(
+   tokenType: TokenTypes
+) : Token(tokenType) {
     override fun toString(): String {
         return "CommonToken: $tokenType.name"
     }

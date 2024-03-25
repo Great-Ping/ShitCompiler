@@ -1,9 +1,9 @@
 package lexicon.tokenParsers
 
-import lexicon.ParsingInfo
+import lexicon.tokens.Token
 import toolkit.enumerators.CharEnumerator
-import toolkit.results.Result
 
 interface TokenParser {
-    fun parse(enumerator: CharEnumerator): Result<ParsingInfo>
+    //Работает на упреждение
+    fun parse(enumerator: CharEnumerator): Token?
 }
