@@ -1,7 +1,7 @@
 package lexicon.tokens.operatorOrPunctuatorTokens
 
-enum class OperatorOrPunctuatorType(val stringValue:String) {
+enum class Operators(val stringValue:String) {
     OPEN_BRACKET("("),
     CLOSE_BRACKET(")"),
-
+    SEMICOLON(";")
 }

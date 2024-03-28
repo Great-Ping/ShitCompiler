@@ -7,21 +7,17 @@ import java.lang.Character.isWhitespace
 
 //!!!Изменяет состояние enumerator
 //Работает на упреждение
+//Доверьтесь нам :)
 fun skipWhitespaces(
     enumerator: CharEnumerator
-) : Boolean {
-    var whitespacesSkipped: Boolean = false
+) : Unit {
     while (enumerator.moveNext()) {
-        if (isWhitespace(enumerator.current))
-            whitespacesSkipped = true;
-        else
+        if (!isWhitespace(enumerator.current)) {
+            enumerator.movePrevious()
             break
-     }
+        }
+    }
 
-    if (whitespacesSkipped)
-        enumerator.movePrevious()
-
-    return whitespacesSkipped
 }
 
 
@@ -37,6 +33,7 @@ fun continuesWith(
         if (enumerator.current != iterator.next())
             return false
     }
+
     return !iterator.hasNext()
 }
 
@@ -47,7 +44,8 @@ fun continuesWith(
     enumerator: CharEnumerator,
     symbol:Char
 ): Boolean {
-    return enumerator.moveNext() && enumerator.current != symbol
+    return enumerator.moveNext()
+            && enumerator.current != symbol
 }
 
 

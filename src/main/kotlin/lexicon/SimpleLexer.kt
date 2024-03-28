@@ -1,5 +1,7 @@
 package lexicon
 
+import lexicon.exceptions.EndOfInputException
+import lexicon.exceptions.UndefinedTokenException
 import lexicon.tokenParsers.*
 import lexicon.tokens.Token
 import toolkit.enumerators.CharEnumerator
@@ -26,10 +28,12 @@ class SimpleLexer   (iterator: CharEnumerator) : Lexer {
         skipWhitespaces(_iterator)
 
         if (!_iterator.hasNext())
-            return Result.fail(Error("String ended"))
+            return Result.fail(
+                EndOfInputException("Input ended"))
 
         for (parser in _parsers) {
             val iteratorState = _iterator.currentIndex
+
             val parsedToken = parser.parse(
                 _iterator
             )
@@ -42,7 +46,8 @@ class SimpleLexer   (iterator: CharEnumerator) : Lexer {
             return Result.ok(parsedToken)
         }
 
-        return Result.fail(Exception("TODO"));
+        return Result.fail(
+            UndefinedTokenException("no parser recognized the token"));
     }
 
     override fun toString(): String {

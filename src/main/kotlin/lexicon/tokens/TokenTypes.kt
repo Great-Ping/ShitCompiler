@@ -1,6 +1,6 @@
 package lexicon.tokens
 
-enum class TokenTypes (val typeFlag: Int){
+enum class TokenTypes (val flag: Int){
     COMMENT                 (0b00000001),
     IDENTIFIER              (0b00000010),
     KEYWORD                 (0b00000100),
