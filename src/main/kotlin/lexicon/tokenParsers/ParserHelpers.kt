@@ -2,7 +2,6 @@ package lexicon.tokenParsers
 
 import toolkit.enumerators.CharEnumerator
 import toolkit.enumerators.moveNext
-import toolkit.enumerators.movePrevious
 import java.lang.Character.isWhitespace
 
 //!!!Изменяет состояние enumerator
@@ -11,12 +10,14 @@ import java.lang.Character.isWhitespace
 fun skipWhitespaces(
     enumerator: CharEnumerator
 ) : Unit {
+    var state = enumerator.currentIndex
     while (enumerator.moveNext()) {
         if (!isWhitespace(enumerator.current)) {
-            enumerator.movePrevious()
             break
         }
+        state = enumerator.currentIndex;
     }
+    enumerator.moveTo(state)
 
 }
 

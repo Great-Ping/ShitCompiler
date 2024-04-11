@@ -4,6 +4,6 @@ import lexicon.tokens.Token
 import lexicon.tokens.TokenTypes
 
 class IdentifierToken(
-//    val identifierName: String
+    val name: String
 ) : Token(TokenTypes.IDENTIFIER) {
 }

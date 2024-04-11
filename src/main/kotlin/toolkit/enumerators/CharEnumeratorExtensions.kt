@@ -1,9 +1,17 @@
 package toolkit.enumerators
 
 fun CharEnumerator.movePrevious(): Boolean{
-    return moveTo(currentIndex - 1)
+    if (hasPrevious()){
+        moveTo(currentIndex - 1)
+        return true;
+    }
+    return false
 }
 
 fun CharEnumerator.moveNext(): Boolean{
-    return moveTo(currentIndex + 1)
+    if (hasNext()){
+        moveTo(currentIndex + 1)
+        return true;
+    }
+    return false
 }

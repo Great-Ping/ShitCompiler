@@ -4,7 +4,6 @@ import lexicon.tokens.Token
 import lexicon.tokens.TokenTypes
 
 class KeywordToken(
-    val keyword: Keyword
+    val keywordName: KeywordNames
 ): Token(TokenTypes.KEYWORD) {
-
 }

@@ -5,7 +5,6 @@ import lexicon.exceptions.UndefinedTokenException
 import lexicon.tokenParsers.*
 import lexicon.tokens.Token
 import toolkit.enumerators.CharEnumerator
-import toolkit.results.Result
 
 class SimpleLexer   (iterator: CharEnumerator) : Lexer {
 
@@ -17,8 +16,7 @@ class SimpleLexer   (iterator: CharEnumerator) : Lexer {
     private val _parsers : Array<TokenParser> = arrayOf(
         CommentTokenParser(),
         OperatorOrPunctuatorTokenParser(),
-        RealLiteralTokenParser(),
-        IntegerLiteralTokenParser(),
+        NumberTokenParser(),
         CharacterLiteralTokenParser(),
         StringLiteralTokenParser(),
         IdentifierOrKeywordTokenParser(),
@@ -28,7 +26,7 @@ class SimpleLexer   (iterator: CharEnumerator) : Lexer {
         skipWhitespaces(_iterator)
 
         if (!_iterator.hasNext())
-            return Result.fail(
+            return Result.failure(
                 EndOfInputException("Input ended"))
 
         for (parser in _parsers) {
@@ -43,10 +41,10 @@ class SimpleLexer   (iterator: CharEnumerator) : Lexer {
                 continue
             }
 
-            return Result.ok(parsedToken)
+            return Result.success(parsedToken)
         }
 
-        return Result.fail(
+        return Result.failure(
             UndefinedTokenException("no parser recognized the token"));
     }
 

@@ -17,11 +17,11 @@ class CharEnumerator(
         get() = _charArray[_currentIndex]
 
 
-    fun moveTo(index: Int): Boolean{
-        if (index >= _charArray.size || index < 0)
-            return false
+    fun moveTo(index: Int){
+//        if (index >= _charArray.size || index < -1)
+//            return false
         _currentIndex = index;
-        return true
+//        return true
     }
 
     override fun hasNext(): Boolean {
