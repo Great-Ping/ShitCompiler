@@ -5,9 +5,9 @@ value class KeywordNames (
     val flag: Int
 ) {
     companion object{
-        val VAR = KeywordNames(0b1)
-        val VAL = KeywordNames(0b01)
-        val IF = KeywordNames(0b001)
+        val VAR = KeywordNames(0b10)
+        val VAL = KeywordNames(0b100)
+        val IF = KeywordNames(0b1000)
     }
 
     operator fun contains(names: KeywordNames): Boolean {

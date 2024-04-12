@@ -42,7 +42,8 @@ class CharEnumerator(
             .drop(
                 if (currentIndex < 0)
                     0
-                else currentIndex)
-            .joinToString()
+                else currentIndex
+            )
+            .joinToString("")
     }
 }

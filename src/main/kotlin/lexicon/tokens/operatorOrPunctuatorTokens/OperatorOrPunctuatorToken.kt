@@ -3,8 +3,12 @@ package lexicon.tokens.operatorOrPunctuatorTokens
 import lexicon.tokens.Token
 import lexicon.tokens.TokenTypes
 
-data class OperatorOrPunctuatorToken(
-    val operatorOrPunctuatorType:Operators
-) : Token(TokenTypes.OPERATOR_OR_PUNCTUATOR) {
-
+class OperatorOrPunctuatorToken (
+    val operator: Operators
+): Token (
+    TokenTypes.OPERATOR_OR_PUNCTUATOR
+) {
+    override fun toString(): String {
+        return "OperatorsToken: ${operator.flag}"
+    }
 }
