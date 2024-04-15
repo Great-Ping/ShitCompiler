@@ -1,10 +1,11 @@
 package lexicon
 
-import lexicon.exceptions.EndOfInputException
+import lexicon.enumerators.CharEnumerator
 import lexicon.exceptions.UndefinedTokenException
 import lexicon.tokenParsers.*
+import lexicon.tokens.CommonToken
 import lexicon.tokens.Token
-import toolkit.enumerators.CharEnumerator
+import lexicon.tokens.TokenTypes
 
 class SimpleLexer   (iterator: CharEnumerator) : Lexer {
 
@@ -26,8 +27,9 @@ class SimpleLexer   (iterator: CharEnumerator) : Lexer {
         skipWhitespaces(_iterator)
 
         if (!_iterator.hasNext())
-            return Result.failure(
-                EndOfInputException("Input ended"))
+            return Result.success(
+                CommonToken(TokenTypes.END)
+            );
 
         for (parser in _parsers) {
             val iteratorState = _iterator.currentIndex
@@ -41,7 +43,9 @@ class SimpleLexer   (iterator: CharEnumerator) : Lexer {
                 continue
             }
 
-            return Result.success(parsedToken)
+            return Result.success(
+                parsedToken
+            )
         }
 
         return Result.failure(

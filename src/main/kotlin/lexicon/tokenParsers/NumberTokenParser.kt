@@ -1,7 +1,7 @@
 package lexicon.tokenParsers
 
+import lexicon.enumerators.CharEnumerator
 import lexicon.tokens.Token
-import toolkit.enumerators.CharEnumerator
 
 class NumberTokenParser : TokenParser {
     override fun parse(enumerator: CharEnumerator): Token? {

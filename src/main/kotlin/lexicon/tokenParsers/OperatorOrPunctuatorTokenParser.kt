@@ -1,11 +1,11 @@
 package lexicon.tokenParsers
 
+import lexicon.enumerators.CharEnumerator
+import lexicon.enumerators.moveNext
+import lexicon.enumerators.movePrevious
 import lexicon.tokens.Token
 import lexicon.tokens.operatorOrPunctuatorTokens.OperatorOrPunctuatorToken
 import lexicon.tokens.operatorOrPunctuatorTokens.Operators
-import toolkit.enumerators.CharEnumerator
-import toolkit.enumerators.moveNext
-import toolkit.enumerators.movePrevious
 
 class OperatorOrPunctuatorTokenParser : TokenParser {
     companion object {
@@ -18,6 +18,9 @@ class OperatorOrPunctuatorTokenParser : TokenParser {
         )
     }
 
+    fun isPartOfOperator(){
+
+    }
 
     override fun parse(enumerator: CharEnumerator): Token? {
         val enumeratorState = enumerator.currentIndex
@@ -31,8 +34,10 @@ class OperatorOrPunctuatorTokenParser : TokenParser {
                 null
             );
 
-            if (newOperator == null)
+            if (newOperator == null) {
+                enumerator.movePrevious();
                 break;
+            }
 
             operator = newOperator;
         }
@@ -40,7 +45,6 @@ class OperatorOrPunctuatorTokenParser : TokenParser {
         if (operator == null)
             return null;
 
-        enumerator.movePrevious()
         return OperatorOrPunctuatorToken(operator)
     }
 }

@@ -1,7 +1,7 @@
 package lexicon.tokenParsers
 
-import toolkit.enumerators.CharEnumerator
-import toolkit.enumerators.moveNext
+import lexicon.enumerators.CharEnumerator
+import lexicon.enumerators.moveNext
 import java.lang.Character.isWhitespace
 
 //!!!Изменяет состояние enumerator

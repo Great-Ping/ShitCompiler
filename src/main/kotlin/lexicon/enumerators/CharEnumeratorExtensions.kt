@@ -1,4 +1,4 @@
-package toolkit.enumerators
+package lexicon.enumerators
 
 fun CharEnumerator.movePrevious(): Boolean{
     if (hasPrevious()){

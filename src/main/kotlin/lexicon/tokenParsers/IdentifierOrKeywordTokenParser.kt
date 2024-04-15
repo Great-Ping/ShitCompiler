@@ -1,12 +1,12 @@
 package lexicon.tokenParsers
 
+import lexicon.enumerators.CharEnumerator
+import lexicon.enumerators.moveNext
+import lexicon.enumerators.movePrevious
 import lexicon.tokens.Token
 import lexicon.tokens.identifiers.IdentifierToken
 import lexicon.tokens.keywords.KeywordNames
 import lexicon.tokens.keywords.KeywordToken
-import toolkit.enumerators.CharEnumerator
-import toolkit.enumerators.moveNext
-import toolkit.enumerators.movePrevious
 
 class IdentifierOrKeywordTokenParser(
 ) : TokenParser {

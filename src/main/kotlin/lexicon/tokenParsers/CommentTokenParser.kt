@@ -3,8 +3,8 @@ package lexicon.tokenParsers
 import lexicon.tokens.CommonToken
 import lexicon.tokens.Token
 import lexicon.tokens.TokenTypes
-import toolkit.enumerators.CharEnumerator
-import toolkit.enumerators.moveNext
+import lexicon.enumerators.CharEnumerator
+import lexicon.enumerators.moveNext
 
 class CommentTokenParser : TokenParser{
 

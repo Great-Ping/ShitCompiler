@@ -1,7 +1,7 @@
 package lexicon.tokenParsers
 
+import lexicon.enumerators.CharEnumerator
 import lexicon.tokens.Token
-import toolkit.enumerators.CharEnumerator
 
 interface TokenParser {
     //Работает на упреждение

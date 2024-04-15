@@ -1,4 +1,4 @@
-package toolkit.enumerators
+package lexicon.enumerators
 
 class CharEnumerator(
     private val _charArray: CharArray,
@@ -25,11 +25,11 @@ class CharEnumerator(
     }
 
     override fun hasNext(): Boolean {
-        return _currentIndex < _charArray.size
+        return _currentIndex + 1 < _charArray.size
     }
 
     fun hasPrevious():Boolean{
-        return _currentIndex > 1
+        return _currentIndex > 0
     }
 
     override fun nextChar(): Char {
