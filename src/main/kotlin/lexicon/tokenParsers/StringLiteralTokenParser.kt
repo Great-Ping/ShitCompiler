@@ -33,7 +33,7 @@ class StringLiteralTokenParser: TokenParser {
         if (!completed)
             return InvalidToken(
                 stringToken,
-                "line is not completed"
+                "Token is not completed"
             )
 
         return stringToken;
