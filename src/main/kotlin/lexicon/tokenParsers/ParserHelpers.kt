@@ -50,3 +50,17 @@ fun continuesWith(
 }
 
 
+val specialСharacters = hashMapOf(
+    'n' to '\n',
+    't' to '\t',
+    'r' to '\r',
+)
+
+//Работает на упреждение
+fun determineEscapeCharacter(enumerator: CharEnumerator): Char? {
+    if (!enumerator.moveNext())
+        return null;
+
+    var char = enumerator.current;
+    return specialСharacters.getOrDefault(char, char)
+}

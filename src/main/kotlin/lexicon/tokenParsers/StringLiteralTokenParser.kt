@@ -18,12 +18,19 @@ class StringLiteralTokenParser: TokenParser {
 
         var completed = false;
         while (enumerator.moveNext()) {
-            if (enumerator.current == '"') {
+            var symbol = enumerator.current;
+            if (symbol == '"') {
                 completed = true;
                 break;
             }
 
-            stringLiteral.append(enumerator.current);
+            if (symbol == '\\') {
+                var escapeCharacter = determineEscapeCharacter(enumerator);
+                if (escapeCharacter != null)
+                    symbol = escapeCharacter;
+            }
+
+            stringLiteral.append(symbol);
         }
 
         val stringToken = StringLiteralToken(

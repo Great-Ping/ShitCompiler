@@ -24,7 +24,7 @@ import kotlin.time.measureTime
 
 
 fun main(args: Array<String>) {
-    var input = "val idName: String = \"SСстринга\";chuyu_bag"
+    var input = "val idName: String = \"SСстринга\\\"hjghj\";chuyu_bag"
     val lexer: Lexer = SimpleLexer(input)
 
     val duration = measureTime{

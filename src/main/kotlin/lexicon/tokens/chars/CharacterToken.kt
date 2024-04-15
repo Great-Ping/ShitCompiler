@@ -4,7 +4,7 @@ import lexicon.tokens.Token
 import lexicon.tokens.TokenTypes
 
 class CharacterToken (
-    val char: String
+    val char: Char
 ) : Token(TokenTypes.CHARACTER_LITERAL) {
     override fun toString(): String {
         return "CharacterToken($char)"

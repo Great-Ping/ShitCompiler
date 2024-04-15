@@ -15,36 +15,28 @@ class CharacterLiteralTokenParser : TokenParser {
         if (enumerator.current != '\'')
             return null;
 
-        var char = StringBuilder();
-        var completed = false;
-        var shielding = false;
+        if (!enumerator.moveNext())
+            return InvalidToken(
+                CharacterToken('\u0000'),
+                "Token is not completed"
+            );
 
-        while (enumerator.moveNext()){
-            val symbol = enumerator.current
-            if (symbol == '\'' && !shielding){
-                completed = true;
-                break;
-            }
+        var symbol = enumerator.current
 
-            shielding = symbol == '\\'
-
-            char.append(symbol);
+        if (symbol == '\\'){
+            val escapeCharacter = determineEscapeCharacter(enumerator)
+            if (escapeCharacter != null)
+                symbol = escapeCharacter;
         }
 
-        val token = CharacterToken(char.toString());
+        val token = CharacterToken(symbol);
 
-        if (!completed)
+        if (!enumerator.moveNext() || enumerator.current != '\'')
             return InvalidToken(
                 token,
                 "Token is not completed"
             )
 
-        if (char.length != 1 && !char.startsWith('\\')) {
-            return InvalidToken(
-                token,
-                "Invalid character")
-        }
-
-        return CharacterToken(char.toString());
+        return token;
     }
 }
