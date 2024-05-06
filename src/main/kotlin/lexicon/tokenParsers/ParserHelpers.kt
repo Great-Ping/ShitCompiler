@@ -18,7 +18,6 @@ fun skipWhitespaces(
         state = enumerator.currentIndex;
     }
     enumerator.moveTo(state)
-
 }
 
 

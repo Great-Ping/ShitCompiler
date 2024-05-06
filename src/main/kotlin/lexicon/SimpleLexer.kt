@@ -1,11 +1,10 @@
 package lexicon
 
 import lexicon.enumerators.CharEnumerator
-import lexicon.exceptions.UndefinedTokenException
+import lexicon.enumerators.moveNext
 import lexicon.tokenParsers.*
-import lexicon.tokens.CommonToken
 import lexicon.tokens.Token
-import lexicon.tokens.TokenTypes
+import lexicon.tokens.UndefinedToken
 
 class SimpleLexer(iterator: CharEnumerator) : Lexer {
 
@@ -14,6 +13,7 @@ class SimpleLexer(iterator: CharEnumerator) : Lexer {
     ) {}
 
     private var _iterator: CharEnumerator = iterator
+    private var _buffer: Token? = null;
     private val _parsers : Array<TokenParser> = arrayOf(
         CommentTokenParser(),
         OperatorOrPunctuatorTokenParser(),
@@ -23,13 +23,12 @@ class SimpleLexer(iterator: CharEnumerator) : Lexer {
         IdentifierOrKeywordTokenParser(),
     )
 
-    override fun nextToken(): Result<Token> {
+    private fun tryGetToken() : Token?
+    {
         skipWhitespaces(_iterator)
 
         if (!_iterator.hasNext())
-            return Result.success(
-                CommonToken(TokenTypes.END)
-            );
+            return EndToken(_iterator.currentIndex)
 
         for (parser in _parsers) {
             val iteratorState = _iterator.currentIndex
@@ -43,13 +42,45 @@ class SimpleLexer(iterator: CharEnumerator) : Lexer {
                 continue
             }
 
-            return Result.success(
-                parsedToken
-            )
+            return parsedToken;
+        }
+        return null
+    }
+
+    private fun selectUndefinedToken() : Token {
+        var token: Token? = null
+        val startIndex = _iterator.currentIndex + 1
+        var endIndex: Int
+
+
+        do {
+            _iterator.moveNext()
+            endIndex = _iterator.currentIndex
+            token = tryGetToken()
+
+        } while (token == null)
+
+        _buffer = token
+
+        return UndefinedToken(
+            _iterator.getSubstring(startIndex, endIndex)
+        )
+    }
+
+
+    override fun nextToken(): Token {
+        var token: Token?
+        if (_buffer != null) {
+            token = _buffer;
+            _buffer = null;
+            return token as Token;
         }
 
-        return Result.failure(
-            UndefinedTokenException("no parser recognized the token"));
+        token = tryGetToken()
+        if (token == null)
+            token = selectUndefinedToken();
+
+        return token;
     }
 
     override fun toString(): String {

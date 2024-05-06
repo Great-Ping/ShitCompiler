@@ -1,10 +1,9 @@
 package lexicon.tokenParsers
 
-import lexicon.tokens.CommonToken
-import lexicon.tokens.Token
-import lexicon.tokens.TokenTypes
 import lexicon.enumerators.CharEnumerator
 import lexicon.enumerators.moveNext
+import lexicon.tokens.CommentToken
+import lexicon.tokens.Token
 
 class CommentTokenParser : TokenParser{
 
@@ -23,15 +22,19 @@ class CommentTokenParser : TokenParser{
         if (!continuesWith(enumerator, start))
             return null
 
+        val startIndex = enumerator.currentIndex + 1;
+        var endIndex:Int
         do {
             val enumeratorState = enumerator.currentIndex
+            endIndex = enumeratorState;
             if (continuesWith(enumerator, end)) {
                 break
             }
             enumerator.moveTo(enumeratorState)
         } while(enumerator.moveNext())
 
-        return CommonToken(TokenTypes.COMMENT)
+        val value = enumerator.getSubstring(startIndex, endIndex);
+        return CommentToken(value)
     }
 
 

@@ -1,8 +1,9 @@
 
+import lexicon.EndToken
 import lexicon.Lexer
 import lexicon.SimpleLexer
 import kotlin.time.measureTime
-import lexicon.tokens.TokenTypes
+
 //Программа = Функция
 //Функция = type Name(**args){
 //    [БлокКода]
@@ -28,9 +29,13 @@ import lexicon.tokens.TokenTypes
 //EOF = <EOF>
 
 fun main(args: Array<String>) {
-    var input = "void Main () {" +
+    var input = " void Main () {" +
+        "//comment\n" +
+        "/*wwww" +
+            "asd\n" +
+            "s*/" +
         "   val idName: String = \"SСстринга\\\"hjghj\";chuyu_bag\n" +
-        "   val ind: Int32 = 101012\n" +
+        "   val ind: Int32 = 123 + 101012 * 1223 + 21\n" +
         "   val idHex: Int32 = 0x10101\n" +
         "   val idByte: Int32 = 0b12213\n" +
         "   val invalid: Int32 = 0b11.1231\n" +
@@ -46,11 +51,7 @@ fun main(args: Array<String>) {
             val result= lexer.nextToken()
             println(result)
 
-            if (result.isFailure)
-                break;
-
-            val token = result.getOrThrow()
-            if (token.type == TokenTypes.END)
+            if (result is EndToken)
                 break;
         }
     }

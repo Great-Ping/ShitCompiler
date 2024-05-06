@@ -32,6 +32,19 @@ class CharEnumerator(
         return _currentIndex > 0
     }
 
+    //По end включительно
+    fun getSubstring(start: Int, end: Int) : String {
+        val destArray = CharArray(end - start + 1);
+        _charArray.copyInto(
+            destArray,
+            0,
+            start,
+            end + 1
+        );
+
+        return String(destArray);
+    }
+
     override fun nextChar(): Char {
         moveNext()
         return current
