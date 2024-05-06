@@ -11,6 +11,7 @@ class OperatorOrPunctuatorTokenParser : TokenParser {
     companion object {
         val operators = hashMapOf(
             "=" to Operators.EQUALLY,
+            "+" to Operators.ADDITION_OPERATOR,
             "(" to Operators.OPEN_BRACE,
             ")" to Operators.CLOSE_BRACE,
             ";" to Operators.SEMICOLON,

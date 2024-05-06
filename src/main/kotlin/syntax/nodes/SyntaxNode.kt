@@ -1,9 +1,5 @@
 package syntax.nodes
 
-interface SyntaxNode {
-    val parent: SyntaxNode;
-
-    fun toList(): List<SyntaxNode> {
-        TODO()
-    }
-}
+abstract class SyntaxNode (
+    val parent: SyntaxNode?
+)

@@ -13,6 +13,7 @@ class Operators(
         val COLON =                 Operators(0b10000)
         val OPEN_CURLY_BRACE =      Operators(0b100000)
         val CLOSE_CURLY_BRACE =     Operators(0b1000000)
+        val ADDITION_OPERATOR =     Operators(0b10000000)
     }
 
     operator fun contains(operators: Operators): Boolean {
