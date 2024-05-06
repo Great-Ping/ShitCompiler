@@ -4,6 +4,6 @@ class UndefinedToken (
     val value: String
 ) : Token(TokenTypes.UNDEFINED) {
     override fun toString(): String {
-        return "UndefinedToken($value)"
+        return "<id, 0>(Лексема: $value)"
     }
 }

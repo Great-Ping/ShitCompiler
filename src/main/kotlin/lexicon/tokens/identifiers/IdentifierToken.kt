@@ -7,6 +7,6 @@ class IdentifierToken(
     val name: String
 ) : Token(TokenTypes.IDENTIFIER) {
     override fun toString(): String {
-        return "IdentifierToken($name)"
+        return "<id, $lexemeTabelIndex>(лексема: $name)"
     }
 }

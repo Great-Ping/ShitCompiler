@@ -4,9 +4,13 @@ import lexicon.enumerators.CharEnumerator
 import lexicon.enumerators.moveNext
 import lexicon.tokenParsers.*
 import lexicon.tokens.Token
+import lexicon.tokens.TokenTypes
 import lexicon.tokens.UndefinedToken
+import lexicon.tokens.identifiers.IdentifierToken
 
 class SimpleLexer(iterator: CharEnumerator) : Lexer {
+
+    var lexemesTabel = mutableListOf("Int", "String", "Char", "Float")
 
     constructor(string: String): this(
         CharEnumerator(string)
@@ -79,6 +83,26 @@ class SimpleLexer(iterator: CharEnumerator) : Lexer {
         token = tryGetToken()
         if (token == null)
             token = selectUndefinedToken();
+
+        token = token.let {
+            if (it.type != TokenTypes.IDENTIFIER)
+                return it;
+
+            var token = it as IdentifierToken
+
+            var index = lexemesTabel.indexOf(token.name);
+
+            if (index < 0) {
+                index = lexemesTabel.count();
+                lexemesTabel.add(token.name);
+
+            }
+
+            token.lexemeTabelIndex = index;
+
+
+            return token;
+        }
 
         return token;
     }

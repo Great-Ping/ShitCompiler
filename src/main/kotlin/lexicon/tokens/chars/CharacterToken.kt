@@ -7,6 +7,6 @@ class CharacterToken (
     val char: Char
 ) : Token(TokenTypes.CHARACTER_LITERAL) {
     override fun toString(): String {
-        return "CharacterToken($char)"
+        return "<$char, $lexemeTabelIndex>"
     }
 }

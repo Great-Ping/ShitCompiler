@@ -10,6 +10,6 @@ abstract class NumberToken(
 ) : Token(numberType) {
 
     override fun toString(): String {
-        return "NumberToken(${stringValue}, ${numberSystem})"
+        return "<$stringValue, $lexemeTabelIndex>"
     }
 }

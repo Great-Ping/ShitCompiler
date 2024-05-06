@@ -9,6 +9,6 @@ class OperatorOrPunctuatorToken (
     TokenTypes.OPERATOR_OR_PUNCTUATOR
 ) {
     override fun toString(): String {
-        return "OperatorsToken(${operator})"
+        return "<$operator, $lexemeTabelIndex>"
     }
 }

@@ -7,6 +7,6 @@ class CommentToken(
 ) {
 
     override fun toString(): String {
-        return "CommentToken($value)"
+        return "<$value, 0>"
     }
 }

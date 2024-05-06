@@ -27,6 +27,7 @@ import syntax.nodes.SyntaxNode
 //EOF = <EOF>
 
 class SyntaxParses {
+
     fun parse(input: String) : SyntaxNode {
         return parse(TokensQueue(input))
     }

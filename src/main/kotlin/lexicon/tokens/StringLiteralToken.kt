@@ -4,6 +4,6 @@ class StringLiteralToken(
     val value: String
 ): Token(TokenTypes.STRING_LITERAL) {
     override fun toString(): String {
-        return "StringToken($value)"
+        return "<id, $lexemeTabelIndex>(StringToken $value)"
     }
 }

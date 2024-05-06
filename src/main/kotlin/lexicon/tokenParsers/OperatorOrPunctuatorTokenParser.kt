@@ -18,6 +18,7 @@ class OperatorOrPunctuatorTokenParser : TokenParser {
             ":" to Operators.COLON,
             "{" to Operators.OPEN_CURLY_BRACE,
             "}" to Operators.CLOSE_CURLY_BRACE,
+            "*" to Operators.MULT
         )
     }
 

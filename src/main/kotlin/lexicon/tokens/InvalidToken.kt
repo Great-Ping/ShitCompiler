@@ -6,6 +6,6 @@ class InvalidToken(
     val errorMessage: String
 ) : Token(TokenTypes.INVALID){
     override fun toString(): String {
-        return "InvalidToken($intendedTypes, $value, $errorMessage)"
+        return "<$value, -1>"
     }
 }
