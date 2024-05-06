@@ -7,7 +7,7 @@ import lexicon.tokens.CommonToken
 import lexicon.tokens.Token
 import lexicon.tokens.TokenTypes
 
-class SimpleLexer   (iterator: CharEnumerator) : Lexer {
+class SimpleLexer(iterator: CharEnumerator) : Lexer {
 
     constructor(string: String): this(
         CharEnumerator(string)

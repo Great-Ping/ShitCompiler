@@ -1,30 +1,44 @@
 
 import lexicon.Lexer
 import lexicon.SimpleLexer
-import lexicon.tokens.TokenTypes
 import kotlin.time.measureTime
-
-//<InitialState> ->
-//    [<CodeBlock>]
+import lexicon.tokens.TokenTypes
+//Программа = Функция
+//Функция = type Name(**args){
+//    [БлокКода]
+//}
+//БлокКода = [Строки | IF]
+//Строка = Выражение EOL
+//Строка = Объявление EOL
 //
-//<CodeBlock> ->
-//    [
-//      IFStatement {<CodeBlock>}
-//      <CodeLine>
-//    ]
-//<CodeLine> ->
-//    <VariableDeclaring>
-//    | <VariableAssigment>
-//    | <FunctionCalling>
+//IfStateMent = if {БлокКода} Option(else {БлокКода})
 //
-//<VariableDeclaring> ->
-//    (Keyword(var) | Keyword(val)) <VariableAssigment>
-//<VariableAssigment> ->
-//    Identefier() Operator(=) <FunctionCalling>
-
+//Объявление = [let|var] Name:Type; //late init
+//Объявление = [let|var] Name = Выражение;
+//
+//Выражение = ОПЕРАТОР Выражение
+//Выражение = Выражение ОПЕРАЦИЯ Выражение
+//Выражение = ВызовФункции
+//
+//Операция = [ * | / | + | - ]
+//ВызовФункции = FunName()
+//
+//
+//EOL = ;
+//EOF = <EOF>
 
 fun main(args: Array<String>) {
-    var input = "val idName: String = \"SСстринга\\\"hjghj\";chuyu_bag"
+    var input = "void Main () {" +
+        "   val idName: String = \"SСстринга\\\"hjghj\";chuyu_bag\n" +
+        "   val ind: Int32 = 101012\n" +
+        "   val idHex: Int32 = 0x10101\n" +
+        "   val idByte: Int32 = 0b12213\n" +
+        "   val invalid: Int32 = 0b11.1231\n" +
+        "   val invalidRealNumber = 0.000.000\n" +
+        "   val validRealNumber = 0.00000" +
+        "   val " +
+        "}"
+
     val lexer: Lexer = SimpleLexer(input)
 
     val duration = measureTime{

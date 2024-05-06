@@ -1,0 +1,4 @@
+package syntax
+
+class TokensQueue {
+}

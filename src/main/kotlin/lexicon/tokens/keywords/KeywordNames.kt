@@ -1,5 +1,7 @@
 package lexicon.tokens.keywords
 
+import lexicon.tokenParsers.IdentifierOrKeywordTokenParser
+
 @JvmInline
 value class KeywordNames (
     val flag: Int
@@ -24,5 +26,14 @@ value class KeywordNames (
 
     fun hasFlag(names: KeywordNames): Boolean {
         return (this and names).flag != 0;
+    }
+
+    override fun toString(): String {
+        val keywords = IdentifierOrKeywordTokenParser.keywords;
+        val selectedKeywords = keywords.filterValues {
+                value -> value.hasFlag(this)
+        }
+
+        return selectedKeywords.keys.joinToString(" | ")
     }
 }

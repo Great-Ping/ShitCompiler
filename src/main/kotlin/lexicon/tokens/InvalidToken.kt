@@ -1,10 +1,11 @@
 package lexicon.tokens
 
 class InvalidToken(
-    val token: Token,
+    val intendedTypes: TokenTypes?,
+    val value: String?,
     val errorMessage: String
 ) : Token(TokenTypes.INVALID){
     override fun toString(): String {
-        return "InvalidToken($token, $errorMessage)"
+        return "InvalidToken($intendedTypes, $errorMessage)"
     }
 }

@@ -5,6 +5,7 @@ import lexicon.enumerators.moveNext
 import lexicon.tokens.InvalidToken
 import lexicon.tokens.StringLiteralToken
 import lexicon.tokens.Token
+import lexicon.tokens.TokenTypes
 
 class StringLiteralTokenParser: TokenParser {
     override fun parse(enumerator: CharEnumerator): Token? {
@@ -39,7 +40,8 @@ class StringLiteralTokenParser: TokenParser {
 
         if (!completed)
             return InvalidToken(
-                stringToken,
+                TokenTypes.STRING_LITERAL,
+                stringToken.value,
                 "Token is not completed"
             )
 

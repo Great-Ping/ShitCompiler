@@ -4,6 +4,7 @@ import lexicon.enumerators.CharEnumerator
 import lexicon.enumerators.moveNext
 import lexicon.tokens.InvalidToken
 import lexicon.tokens.Token
+import lexicon.tokens.TokenTypes
 import lexicon.tokens.chars.CharacterToken
 
 class CharacterLiteralTokenParser : TokenParser {
@@ -17,7 +18,8 @@ class CharacterLiteralTokenParser : TokenParser {
 
         if (!enumerator.moveNext())
             return InvalidToken(
-                CharacterToken('\u0000'),
+                TokenTypes.CHARACTER_LITERAL,
+                null,
                 "Token is not completed"
             );
 
@@ -33,7 +35,8 @@ class CharacterLiteralTokenParser : TokenParser {
 
         if (!enumerator.moveNext() || enumerator.current != '\'')
             return InvalidToken(
-                token,
+                TokenTypes.CHARACTER_LITERAL,
+                "'"+symbol,
                 "Token is not completed"
             )
 

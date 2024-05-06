@@ -64,3 +64,4 @@ fun determineEscapeCharacter(enumerator: CharEnumerator): Char? {
     var char = enumerator.current;
     return specialСharacters.getOrDefault(char, char)
 }
+

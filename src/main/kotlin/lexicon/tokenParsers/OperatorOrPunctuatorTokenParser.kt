@@ -11,10 +11,12 @@ class OperatorOrPunctuatorTokenParser : TokenParser {
     companion object {
         val operators = hashMapOf(
             "=" to Operators.EQUALLY,
-            "(" to Operators.OPEN_BRACKET,
-            ")" to Operators.CLOSE_BRACKET,
+            "(" to Operators.OPEN_BRACE,
+            ")" to Operators.CLOSE_BRACE,
             ";" to Operators.SEMICOLON,
-            ":" to Operators.COLON
+            ":" to Operators.COLON,
+            "{" to Operators.OPEN_CURLY_BRACE,
+            "}" to Operators.CLOSE_CURLY_BRACE,
         )
     }
 

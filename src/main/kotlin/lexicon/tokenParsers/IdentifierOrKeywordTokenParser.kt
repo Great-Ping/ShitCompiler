@@ -48,7 +48,7 @@ class IdentifierOrKeywordTokenParser(
         if (!isFirstAllowedCharacter(enumerator.current))
             return null;
 
-        while (enumerator.moveNext()) {
+        while (enumerator.moveNext()){
             if(!isSubsequentAllowedCharacter(enumerator.current)) {
                 enumerator.movePrevious();
                 break
