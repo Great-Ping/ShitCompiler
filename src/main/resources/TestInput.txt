@@ -23,6 +23,10 @@ func main() {
     */
 }
 
+func someProcedure() {
+    // Something in this...
+}
+
 func someFuncExecute(): Int {
     return 5
 }
