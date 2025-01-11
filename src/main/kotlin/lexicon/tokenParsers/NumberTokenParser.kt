@@ -8,6 +8,7 @@ import lexicon.tokens.Token
 import lexicon.tokens.TokenTypes
 import lexicon.tokens.numbers.IntegerNumberToken
 import lexicon.tokens.numbers.NumberSystem
+import lexicon.tokens.numbers.NumberToken
 import lexicon.tokens.numbers.RealNumberToken
 
 class NumberTokenParser : TokenParser {
@@ -139,9 +140,9 @@ class NumberTokenParser : TokenParser {
         val symbol = enumerator.current;
 
         val numberSystem =
-            if (firstSymbol == '0' && symbol == 'x')
+            if (symbol == 'x')
                 NumberSystem.HEXADECIMAL
-            else if (firstSymbol == '0' && symbol == 'b')
+            else if (symbol == 'b')
                 NumberSystem.BINARY
             else NumberSystem.DECIMAL;
 
@@ -151,6 +152,16 @@ class NumberTokenParser : TokenParser {
             numberValue.append(symbol);
         }
 
-        return parseNumberSystem(enumerator, numberValue, numberSystem);
+        val numberToken = parseNumberSystem(enumerator, numberValue, numberSystem);
+
+        if (numberToken !is NumberToken){
+            return numberToken;
+        }
+
+        if (numberToken.numberSystem != NumberSystem.DECIMAL && firstSymbol != '0'){
+            return InvalidToken(TokenTypes.INTEGER_LITERAL, numberToken.stringValue, "Invalid number system");
+        }
+
+        return numberToken;
     }
 }

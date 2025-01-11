@@ -22,6 +22,8 @@ fun main(
         while (true) {
             val result = lexer.nextToken()
 
+            result.type.flag
+
             println(result)
 
             if (result is EndToken)

@@ -1,6 +1,6 @@
 //Комментирую что хочу
 
-fun main() {
+func main() {
     var a: Int = 0xf;
 
     if (a == 0b1111)
@@ -21,4 +21,8 @@ fun main() {
     как
     могу
     */
+}
+
+func someFuncExecute(): Int {
+    return 5
 }
