@@ -35,17 +35,6 @@ class NumberTokenParser : TokenParser {
         return symbol.isDigit()
     }
 
-    private fun chooseNumberSystem(
-        numberValue: StringBuilder,
-    ) : NumberSystem {
-        if (numberValue.last() == 'x')
-            return NumberSystem.HEXADECIMAL
-        if (numberValue.last() == 'b')
-            return  NumberSystem.BINARY
-
-        return NumberSystem.DECIMAL
-    }
-
     private fun getNumberSystemAlphabet(
         numberSystem: NumberSystem
     ) = when(numberSystem){
@@ -134,12 +123,12 @@ class NumberTokenParser : TokenParser {
         if (!enumerator.moveNext())
             return null
 
-        var symbol = enumerator.current;
-        if (!symbol.isDigit())
+        var firstSymbol = enumerator.current;
+        if (!firstSymbol.isDigit())
             return null;
 
         var numberValue = StringBuilder();
-        numberValue.append(symbol);
+        numberValue.append(firstSymbol);
 
         if (!enumerator.moveNext())
             return IntegerNumberToken(
@@ -147,10 +136,21 @@ class NumberTokenParser : TokenParser {
                 NumberSystem.DECIMAL
             )
 
-        symbol = enumerator.current;
-        numberValue.append(symbol);
+        val symbol = enumerator.current;
 
-        val numberSystem = chooseNumberSystem(numberValue);
+        val numberSystem =
+            if (firstSymbol == '0' && symbol == 'x')
+                NumberSystem.HEXADECIMAL
+            else if (firstSymbol == '0' && symbol == 'b')
+                NumberSystem.BINARY
+            else NumberSystem.DECIMAL;
+
+        if (numberSystem == NumberSystem.DECIMAL){
+            enumerator.movePrevious();
+        } else {
+            numberValue.append(symbol);
+        }
+
         return parseNumberSystem(enumerator, numberValue, numberSystem);
     }
 }
