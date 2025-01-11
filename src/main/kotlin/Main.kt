@@ -5,25 +5,29 @@ import lexicon.SimpleLexer
 import kotlin.time.measureTime
 
 
-fun main(args: Array<String>) {
-    val resource = object{}.javaClass
-        .getResourceAsStream("TestInput.txt")
-        ?.bufferedReader()
-        ?.readText();
+fun main(
+    args: Array<String>
+) {
+    val input = object {}.javaClass
+        .getResourceAsStream(
+            "TestInput.txt"
+        )?.bufferedReader()
+        ?.readText() ?: ""
 
-    val input = resource ?: ""
+    val lexer = SimpleLexer(input)
 
-    val lexer: Lexer = SimpleLexer(input)
+    val duration = measureTime {
+        while (true) {
+            val result = lexer.nextToken()
 
-    val duration = measureTime{
-        while(true) {
-            val result= lexer.nextToken()
             println(result)
 
             if (result is EndToken)
-                break;
+                break
         }
     }
 
-    println(duration.inWholeNanoseconds)
+    println(
+        duration.inWholeNanoseconds
+    )
 }

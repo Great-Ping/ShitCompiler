@@ -16,15 +16,14 @@ class IdentifierOrKeywordTokenParser(
             "val" to KeywordNames.VAL,
             "var" to KeywordNames.VAR,
             "if" to KeywordNames.IF,
+            "func" to KeywordNames.FUNC,
+            "return" to KeywordNames.RETURN
         )
-        init {
-
-        }
     }
 
     private fun isFirstAllowedCharacter(symbol: Char): Boolean {
-        return (symbol >= '@' && symbol <= 'Z')
-                || (symbol >= 'a' && symbol <= 'z')
+        return (symbol in '@'..'Z')
+                || (symbol in 'a'..'z')
                 || (symbol == '_')
     }
 
@@ -36,8 +35,9 @@ class IdentifierOrKeywordTokenParser(
                 || (symbol in '0'..'9')
     }
 
-    override fun parse(enumerator: CharEnumerator): Token? {
-
+    override fun parse(
+        enumerator: CharEnumerator
+    ): Token? {
         if (!enumerator.moveNext())
             return null;
 

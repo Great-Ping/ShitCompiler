@@ -1,6 +1,8 @@
-//Комментирую что хочу
 
-fun main(){
+// Комментирую что хочу
+
+func Main(): Unit {
+    // Комментирую что хочу
     var a: Int = 0xf;
 
     if (a == 0b1111)
@@ -22,3 +24,9 @@ fun main(){
     могу
     */
 }
+
+func someFunc(): Int {
+    val a = 5;
+    return a;
+}
+

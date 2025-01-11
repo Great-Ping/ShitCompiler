@@ -7,26 +7,49 @@ value class KeywordNames (
     val flag: Int
 ) {
     companion object{
-        val VAR = KeywordNames(0b10)
-        val VAL = KeywordNames(0b100)
-        val IF = KeywordNames(0b1000)
+        private const val VALUE = 0b1
+        val VAR = KeywordNames(
+            VALUE shl 1
+        )
+
+        val VAL = KeywordNames(
+            VALUE shl 2
+        )
+
+        val IF = KeywordNames(
+            VALUE shl 3
+        )
+
+        val FUNC = KeywordNames(
+            VALUE shl 4
+        )
+
+        val RETURN = KeywordNames(
+            VALUE shl 5
+        )
     }
 
-    operator fun contains(names: KeywordNames): Boolean {
-        return hasFlag(names);
-    }
+    operator fun contains(
+        names: KeywordNames
+    ) = hasFlag(
+        names
+    )
 
-    infix fun and(names: KeywordNames) : KeywordNames {
-        return KeywordNames(this.flag and names.flag)
-    }
+    infix fun and(
+        names: KeywordNames
+    ) = KeywordNames(
+        this.flag and names.flag
+    )
 
-    infix fun or(names: KeywordNames) : KeywordNames{
-        return KeywordNames(this.flag or names.flag)
-    }
+    infix fun or(
+        names: KeywordNames
+    ) = KeywordNames(
+        this.flag or names.flag
+    )
 
-    fun hasFlag(names: KeywordNames): Boolean {
-        return (this and names).flag != 0;
-    }
+    fun hasFlag(
+        names: KeywordNames
+    ) = (this and names).flag != 0
 
     override fun toString(): String {
         val keywords = IdentifierOrKeywordTokenParser.keywords;
