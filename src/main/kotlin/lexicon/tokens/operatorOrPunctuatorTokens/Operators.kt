@@ -14,6 +14,7 @@ class Operators(
         val OPEN_CURLY_BRACE =      Operators(0b100000)
         val CLOSE_CURLY_BRACE =     Operators(0b1000000)
         val ADDITION_OPERATOR =     Operators(0b10000000)
+        val COMMA =                 Operators(0b100000000)
     }
 
     operator fun contains(operators: Operators): Boolean {
