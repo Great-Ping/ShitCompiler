@@ -2,6 +2,8 @@
 import lexicon.EndToken
 import lexicon.Lexer
 import lexicon.SimpleLexer
+import lexicon.tokens.keywords.KeywordNames
+import lexicon.tokens.keywords.KeywordToken
 import kotlin.time.measureTime
 
 
