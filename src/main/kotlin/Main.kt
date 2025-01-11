@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
         ?.bufferedReader()
         ?.readText();
 
-    val input=  if (resource != null) resource as String else ""
+    val input = resource ?: ""
 
     val lexer: Lexer = SimpleLexer(input)
 
